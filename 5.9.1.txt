@@ -1,0 +1,4 @@
+I tried to call all functions with the arguments the question providing, and the result is 
+'a',c,uc,sc in f(char a) are legal,
+c in g(char & a) is legal
+'c in h(const char a) is legal
