@@ -3,40 +3,55 @@
 #include<math.h>
 using namespace std;
 
-int atoi(char* ch){
+//To decimalism
+int atoi_d(char* ch){
     int d = strlen(ch);
     int count_d = 0;
-    int count_o = 0;
-    int count_h = 0;
     int j = 0;
-    int o = d;
-    int h = d;
-
-    //To decimalism
-    while(d > 0){
+	while(d > 0){
         count_d += (*(ch + d-- - 1) - 48) * pow(10, j++);
     }
-    cout << "Decimalim:" << count_d << endl;
+    return count_d;
+}
 
-    //To octonary
-    j = 0;
-    while(o > 0){
-        count_o += (*(ch + o-- - 1) - 48) * pow(8, j++);
-    }
-    cout << "Octonary:" << count_o << endl;
+//To hctonary
+int atoi_h(char* ch) {
+	int d = strlen(ch);
+	int count_d = 0;
+	int count_h = 0;
+	int j = 0;
+	int h = d;
+	//To hctonary
+	j = 0;
+	while (h > 0) {
+		if ((*(ch + h - 1) - 48) >= 0 && (*(ch + h - 1) - 48) < 10) {
+			count_h += (*(ch + h-- - 1) - 48) * pow(16, j++);
+		}
+		else {
+			count_h += (*(ch + h-- - 1) - 55) * pow(16, j++);
+		}
+	}
+	return count_h;
+}
 
-    //To hexadecimal
-    j = 0;
-    while(h > 0){
-        count_h += (*(ch + h-- - 1) - 48) * pow(16, j++);
-    }
-    cout << "Hexadecimal:" << count_h << endl;
-    
+int atoi_o(char* ch) {
+	int d = strlen(ch);
+	int count_d = 0;
+	int count_o = 0;
+	int j = 0;
+	int o = d;
+	while(o > 0){
+
+		count_o += (*(ch + o-- - 1) - 48) * pow(8, j++);
+	}
+	return count_o;
 }
 
 int main(){
     char ch[10];
     cin >> ch;
-    atoi(ch);
+	//printf("%d", atoi_d(ch));
+	//printf("%o", atoi_o(ch));
+	printf("%X", atoi_h(ch));
     return 0;
 }

@@ -5,14 +5,13 @@ char * itoa(int i, char *b){
     int m = 0;
     char temp[10];
     while(i != 0){
-        temp[n] = i % 10 + 48;
-        std::cout << temp[n];
-        n++;
+        temp[n++] = i % 10 + 48;
         i = (i - i % 10) / 10;
     }
-    while(n >= 0){
-        *(b + m++) = temp[n--];
-    
+    while(n > 0){
+        *(b + m) = temp[--n];
+		cout << *(b + m);
+		m++;
     }
     return b;
 }
@@ -20,6 +19,6 @@ char * itoa(int i, char *b){
     int i;
     char b[10];
     std::cin >> i;
-    itoa(i, b);
+	itoa(i, b);
     return 0;
  }
