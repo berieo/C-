@@ -88,7 +88,7 @@ class String::Cref {		// 引用s[i]
 	int i;
 
 	Cref(String& ss, int ii) : s(ss), i(ii) { }   //赋值操作
-	
+
 public:
 	operator char() const { s.check(i); return s.read(i); }	// 产生值
 	void operator=(char c) { s.write(i, c); }			// 修改值
@@ -105,7 +105,7 @@ String::String(const String& x)	//复制构造函数
 	rep = x.rep;	// 共享表示
 }
 
-String::~String()     
+String::~String()
 {
 	if (--rep->n == 0) delete rep;
 }
@@ -118,7 +118,7 @@ String& String::operator=(const String & x)	// 复制赋值
 	return *this;
 }
 
-String::String(const char* s)      
+String::String(const char* s)
 {
 	rep = new Srep(strlen(s), s);
 }
@@ -145,10 +145,16 @@ char String::read(int i) const  //读取第i个字符
 	return rep->s[i];
 }
 
-void String::write(int i, char c)  
+void String::write(int i, char c)
 {
 	check(i);
 	rep->s[i] = c;
+}
+
+String::Cref String::operator[](int i)
+{
+	check(i);
+	return Cref(*this, i);
 }
 
 char String::operator[](int i) const      //
@@ -198,10 +204,10 @@ bool operator!=(const String & x, const String & y)  //类和类比较
 void ff(String s, const String & r)
 {
 	char c1 = s[1];
-	s[1] = 'c';		
+	s[1] = 'c';
 
-	char c2 = r[1];	
-//	r[1] = 'd';		// error: assignment to non-lvalue char, r.operator[](1) = 'd'
+	char c2 = r[1];
+	//	r[1] = 'd';		// error: assignment to non-lvalue char, r.operator[](1) = 'd'
 }
 
 int hash(const String & s)
